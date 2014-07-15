@@ -48,4 +48,12 @@ public class Recorder {
 		targetLine.close();
 	}
 	
+	public static void main(String[] args) throws LineUnavailableException, InterruptedException{
+		Recorder r = new Recorder();
+		r.setFile("/home/tzoorp/1.wav");
+		r.record();
+		Thread.sleep(5000);
+		r.stopRecording();
+	}
+	
 }

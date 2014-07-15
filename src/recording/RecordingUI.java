@@ -1,5 +1,6 @@
 package recording;
 
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.io.File;
 import javax.sound.sampled.LineUnavailableException;
@@ -16,7 +17,7 @@ public class RecordingUI extends JFrame implements ActionListener{
 		recorder = new Recorder();
 		chooser = new JFileChooser();
 		chooser.setCurrentDirectory(new File("."));
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 	    chooser.setAcceptAllFileFilterUsed(false);
 		
 		init_graphics();
@@ -39,7 +40,11 @@ public class RecordingUI extends JFrame implements ActionListener{
 		stop.addActionListener(this);
 		fileDisplay = new JTextArea();
 		
-		
+		setLayout(new GridLayout(2,2));
+		add(start);
+		add(stop);
+		add(choose);
+		add(fileDisplay);
 	}
 	
 	public void actionPerformed(ActionEvent e){
@@ -47,7 +52,7 @@ public class RecordingUI extends JFrame implements ActionListener{
 		if(command.equals("choose file")){
 			int r = chooser.showOpenDialog(new JFrame());
 			if (r == JFileChooser.APPROVE_OPTION) {
-			      String name = chooser.getSelectedFile().getName();
+			      String name = chooser.getSelectedFile().getAbsolutePath();
 			      recorder.setFile(name);
 			}
 			fileDisplay.setText(recorder.getFile());
